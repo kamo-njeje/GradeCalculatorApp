@@ -1,0 +1,14 @@
+# Ignore compiled class files
+/out/
+*.class
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and system files
+*.log
