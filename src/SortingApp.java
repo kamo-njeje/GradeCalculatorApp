@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class SortingApp {
-
     public static void main(String[] args) {
         try {
             File file = new File("input.txt");
@@ -19,7 +18,12 @@ public class SortingApp {
             System.out.println("Original numbers:");
             printArray(numbers, count);
 
-            bubbleSort(numbers, count);
+            // Use strategy pattern
+            SortContext context = new SortContext();
+
+            // Choose strategy at runtime
+            context.setSortStrategy(new BubbleSort()); // or new InsertionSort()
+            context.sort(numbers, count);
 
             System.out.println("\nSorted numbers:");
             printArray(numbers, count);
@@ -30,21 +34,6 @@ public class SortingApp {
         }
     }
 
-    public static void bubbleSort(int[] arr, int size) {
-        boolean swapped;
-        do {
-            swapped = false;
-            for (int i = 0; i < size - 1; i++) {
-                if (arr[i] > arr[i + 1]) {
-                    int temp = arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = temp;
-                    swapped = true;
-                }
-            }
-        } while (swapped);
-    }
-
     public static void printArray(int[] arr, int size) {
         for (int i = 0; i < size; i++) {
             System.out.print(arr[i] + " ");
@@ -52,4 +41,3 @@ public class SortingApp {
         System.out.println();
     }
 }
-
