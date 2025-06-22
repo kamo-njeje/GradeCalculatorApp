@@ -1,10 +1,14 @@
-# SortingApp
+# SortingApp 
 
-This Java console application reads numbers from a file, sorts them using bubble sort, and prints the results.
+A Java console application that sorts numbers using different algorithms (Bubble Sort, Insertion Sort, Selection Sort), implemented with the **Strategy Design Pattern**.
 
-## How to Run
+##  Features
+- Reads numbers from `input.txt`
+- Lets the user choose sorting method
+- Saves sorted result to `output.txt`
 
-1. Place numbers in `input.txt` file (e.g. `5 2 9 1 7 3`)
-2. Compile:
-   ```bash
-   javac -d out src/SortingApp.java
+##  How to Run
+
+```bash
+javac -d out src/*.java
+java -cp out SortingApp
