@@ -1,0 +1,5 @@
+Student: Kamohelo
+Courses:
+BIT: 75.0
+Average: 75.00
+Result: PASS

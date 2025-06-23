@@ -1,34 +1,55 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class SortingApp {
     public static void main(String[] args) {
         try {
             File file = new File("input.txt");
-            Scanner scanner = new Scanner(file);
+            Scanner fileScanner = new Scanner(file);
 
             int[] numbers = new int[100];
             int count = 0;
 
-            while (scanner.hasNextInt()) {
-                numbers[count++] = scanner.nextInt();
+            while (fileScanner.hasNextInt()) {
+                numbers[count++] = fileScanner.nextInt();
             }
 
             System.out.println("Original numbers:");
             printArray(numbers, count);
 
-            // Use strategy pattern
+            Scanner inputScanner = new Scanner(System.in);
+            System.out.println("\nChoose a sorting algorithm:");
+            System.out.println("1. Bubble Sort");
+            System.out.println("2. Insertion Sort");
+            System.out.println("3. Selection Sort");
+            System.out.print("Enter your choice (1, 2 or 3): ");
+            int choice = inputScanner.nextInt();
+
             SortContext context = new SortContext();
 
-            // Choose strategy at runtime
-            context.setSortStrategy(new BubbleSort()); // or new InsertionSort()
-            context.sort(numbers, count);
+            if (choice == 1) {
+                context.setSortStrategy(new BubbleSort());
+                System.out.println("\nUsing Bubble Sort:");
+            } else if (choice == 2) {
+                context.setSortStrategy(new InsertionSort());
+                System.out.println("\nUsing Insertion Sort:");
+            } else if (choice == 3) {
+                context.setSortStrategy(new SelectionSort());
+                System.out.println("\nUsing Selection Sort:");
+            } else {
+                System.out.println("Invalid choice. Exiting.");
+                return;
+            }
 
-            System.out.println("\nSorted numbers:");
+            context.sort(numbers, count);
             printArray(numbers, count);
 
-            scanner.close();
+            fileScanner.close();
+            inputScanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("input.txt file not found.");
         }
@@ -40,4 +61,18 @@ public class SortingApp {
         }
         System.out.println();
     }
+
+    public static void writeToFile(int[] arr, int size, String filename) {
+    try {
+        FileWriter writer = new FileWriter(filename);
+        for (int i = 0; i < size; i++) {
+            writer.write(arr[i] + " ");
+        }
+        writer.close();
+        System.out.println("Sorted numbers written to " + filename);
+    } catch (IOException e) {
+        System.out.println("An error occurred while writing to file.");
+    }
+}
+
 }
