@@ -17,6 +17,14 @@ public class Course {
         return mark;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMark(double mark) {
+        this.mark = mark;
+    }
+
     public String getGrade() {
         if (mark >= 75) return "A";
         else if (mark >= 65) return "B";

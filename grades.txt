@@ -1,6 +1,5 @@
-Student: Kamo
+Student: Kmaohelo
 Courses:
-IADA: 25.0 → Grade: F
-IMOB: 67.0 → Grade: B
-Average: 46.00
-Result: FAIL
+IMOB: 56.0 → Grade: C
+Average: 56.00
+Result: PASS
