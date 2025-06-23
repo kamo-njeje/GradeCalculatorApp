@@ -17,8 +17,16 @@ public class Course {
         return mark;
     }
 
+    public String getGrade() {
+        if (mark >= 75) return "A";
+        else if (mark >= 65) return "B";
+        else if (mark >= 50) return "C";
+        else if (mark >= 40) return "D";
+        else return "F";
+    }
+
     @Override
     public String toString() {
-        return name + ": " + mark;
+        return name + ": " + mark + " → Grade: " + getGrade();
     }
 }

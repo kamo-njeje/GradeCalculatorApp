@@ -28,14 +28,15 @@ public class GradeCalculatorApp {
             student.addCourse(course);
         }
 
+        System.out.println("\n--- Grade Report ---");
+        for (Course c : student.getCourses()) {
+            System.out.println(c); // includes grade via toString()
+        }
+
         double average = student.calculateAverage();
         System.out.printf("Average mark: %.2f%n", average);
-
-        if (average >= 50) {
-            System.out.println("Result: PASS");
-        } else {
-            System.out.println("Result: FAIL");
-        }
+        String result = (average >= 50) ? "PASS" : "FAIL";
+        System.out.println("Result: " + result);
 
         // Save to grades.txt
         try {
@@ -46,11 +47,26 @@ public class GradeCalculatorApp {
                 writer.write(c.toString() + "\n");
             }
             writer.write(String.format("Average: %.2f%n", average));
-            writer.write(average >= 50 ? "Result: PASS\n" : "Result: FAIL\n");
+            writer.write("Result: " + result + "\n");
             writer.close();
             System.out.println("Grades saved to grades.txt");
         } catch (IOException e) {
             System.out.println("Failed to save file.");
+        }
+
+        // Save to grades.csv
+        try {
+            FileWriter csvWriter = new FileWriter("grades.csv");
+            csvWriter.write("Course,Mark,Grade\n"); // Header
+            for (Course c : student.getCourses()) {
+                csvWriter.write(c.getName() + "," + c.getMark() + "," + c.getGrade() + "\n");
+            }
+            csvWriter.write(String.format("Average,,%.2f\n", average));
+            csvWriter.write("Result,," + result + "\n");
+            csvWriter.close();
+            System.out.println("Grades saved to grades.csv");
+        } catch (IOException e) {
+            System.out.println("Failed to save CSV file.");
         }
 
         scanner.close();
